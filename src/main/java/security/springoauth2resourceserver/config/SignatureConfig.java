@@ -36,7 +36,7 @@ public class SignatureConfig {
     public RSAKey rsaKey() throws JOSEException {
         return new RSAKeyGenerator(2048)
                 .keyID("rsaKey")
-                .algorithm(JWSAlgorithm.RS256)
+                .algorithm(JWSAlgorithm.RS512)
                 .generate();
     }
 

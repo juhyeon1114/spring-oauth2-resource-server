@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,18 +55,15 @@ public class OAuth2ResourceServerConfig {
 
         http.userDetailsService(userDetailsService());
 
-        /* MAC */
         /* - 사용자 승인, 토큰 서명, 발행을 담당하는 필터 */
-//        http.addFilterBefore(jwtAuthenticationFilter(macSecuritySigner, octetSequenceKey), UsernamePasswordAuthenticationFilter.class);
-        /* - 토큰 검증  */
-//        http.addFilterBefore(jwtAuthorizationMacFilter(octetSequenceKey), UsernamePasswordAuthenticationFilter.class); // AuthorizationFilter 로 검증하기
-//        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt); // JWT 디코더로 검증하기
+//        http.addFilterBefore(jwtAuthenticationFilter(macSecuritySigner, octetSequenceKey), UsernamePasswordAuthenticationFilter.class); // MAC
+        http.addFilterBefore(jwtAuthenticationFilter(null, null), UsernamePasswordAuthenticationFilter.class); // RSA
+        /* - 토큰 검증 #1 : AuthorizationFilter  */
+//        http.addFilterBefore(jwtAuthorizationMacFilter(octetSequenceKey), UsernamePasswordAuthenticationFilter.class); // MAC
+        http.addFilterBefore(jwtAuthorizationRsaFilter(null), UsernamePasswordAuthenticationFilter.class); // RSA
 
-        /* RSA */
-        /* - 사용자 승인, 토큰 서명, 발행을 담당하는 필터 */
-        http.addFilterBefore(jwtAuthenticationFilter(null, null), UsernamePasswordAuthenticationFilter.class);
-        /* - 토큰 검증  */
-        http.addFilterBefore(jwtAuthorizationRsaFilter(null), UsernamePasswordAuthenticationFilter.class);
+        /* - 토큰 검증 #2 : JWT 디코더  */
+        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
         return http.build();
     }
