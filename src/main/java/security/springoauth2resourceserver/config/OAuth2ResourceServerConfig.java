@@ -58,12 +58,13 @@ public class OAuth2ResourceServerConfig {
         /* - 사용자 승인, 토큰 서명, 발행을 담당하는 필터 */
 //        http.addFilterBefore(jwtAuthenticationFilter(macSecuritySigner, octetSequenceKey), UsernamePasswordAuthenticationFilter.class); // MAC
         http.addFilterBefore(jwtAuthenticationFilter(null, null), UsernamePasswordAuthenticationFilter.class); // RSA
-        /* - 토큰 검증 #1 : AuthorizationFilter  */
+
+        /* - 토큰 검증 #1 : JWT 디코더  */
+        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+
+        /* - 토큰 검증 #2 : AuthorizationFilter  */
 //        http.addFilterBefore(jwtAuthorizationMacFilter(octetSequenceKey), UsernamePasswordAuthenticationFilter.class); // MAC
         http.addFilterBefore(jwtAuthorizationRsaFilter(null), UsernamePasswordAuthenticationFilter.class); // RSA
-
-        /* - 토큰 검증 #2 : JWT 디코더  */
-        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
         return http.build();
     }
