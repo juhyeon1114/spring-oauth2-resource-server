@@ -3,14 +3,13 @@ package security.springoauth2resourceserver.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 //@Configuration
 @RequiredArgsConstructor
-public class OAuth2ResourceServerConfigStudy {
+public class ResourceServerConfigStudy {
 
     private final OAuth2ResourceServerProperties properties;
 

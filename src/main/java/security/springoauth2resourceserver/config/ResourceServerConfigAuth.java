@@ -1,7 +1,6 @@
 package security.springoauth2resourceserver.config;
 
 import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.jwk.OctetSequenceKey;
@@ -30,9 +29,9 @@ import security.springoauth2resourceserver.filter.authorization.JwtAuthorization
 import security.springoauth2resourceserver.signature.MacSecuritySigner;
 import security.springoauth2resourceserver.signature.RsaSecuritySigner;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
-public class OAuth2ResourceServerConfig {
+public class ResourceServerConfigAuth {
 
     private final MacSecuritySigner macSecuritySigner;
     private final OctetSequenceKey octetSequenceKey;
