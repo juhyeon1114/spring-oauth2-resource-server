@@ -3,11 +3,13 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          ### ? ? ??? ?? ###
-          issuer-uri: http://localhost:9090/realms/oauth2 # JWT ?? ??? (?? ??? ???)
-          jwk-set-uri: http://localhost:9090/realms/oauth2/protocol/openid-connect/certs # ??? jwt??? ??? ??? ??? ? ?? ?????
+          ### 둘 중에 1개는 필수로 설정 ###
+          issuer-uri: http://localhost:9090/realms/oauth2
+          jwk-set-uri: http://localhost:9090/realms/oauth2/protocol/openid-connect/certs
 
-          ### ?? ?? ###
-#          jws-algorithms: RSA256 # ?? ????
-#          audiences: http://localhost:8080 # ???
-#          public-key-location: classpath:certs/publicKey.txt # OAuth2 JWS ??? ?? public key ?? ??
+          ### 선택사항 ###
+          jws-algorithms: HS256
+#          jws-algorithms: RSA256
+#          audiences: http://localhost:8080
+#          public-key-location: classpath:certs/publicKey.txt
+
