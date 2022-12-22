@@ -40,4 +40,14 @@ public class PhotoController {
                 .build();
     }
 
+    @GetMapping("/photos/custom-role")
+    public Photo photos4() {
+        return Photo.builder()
+                .photoId("4")
+                .photoDescription("photo 4 desc")
+                .photoTitle("photo 4 title")
+                .userId("user4")
+                .build();
+    }
+
 }
