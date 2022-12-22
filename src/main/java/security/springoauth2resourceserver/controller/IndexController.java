@@ -1,4 +1,4 @@
-package security.springoauth2resourceserver;
+package security.springoauth2resourceserver.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

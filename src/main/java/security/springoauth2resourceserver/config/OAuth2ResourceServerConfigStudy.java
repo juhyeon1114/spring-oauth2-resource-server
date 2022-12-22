@@ -1,21 +1,16 @@
-package security.springoauth2resourceserver;
+package security.springoauth2resourceserver.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
-import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
-public class OAuth2ResourceServerConfig {
+public class OAuth2ResourceServerConfigStudy {
 
     private final OAuth2ResourceServerProperties properties;
 
@@ -29,19 +24,25 @@ public class OAuth2ResourceServerConfig {
         return http.build();
     }
 
-    // #1 Default JWT 디코더와 동일
-    @Bean
-    public JwtDecoder jwtDecoder1() {
-        return JwtDecoders.fromIssuerLocation(properties.getJwt().getIssuerUri());
-    }
+    /**
+     * #1 Default JWT 디코더와 동일
+     */
+//    @Bean
+//    public JwtDecoder jwtDecoder1() {
+//        return JwtDecoders.fromIssuerLocation(properties.getJwt().getIssuerUri());
+//    }
 
-    // #2 Oidc 이슈어 URI 초기화
+    /**
+     * #2 Oidc 이슈어 URI 초기화
+     */
 //    @Bean
 //    public JwtDecoder jwtDecoder2() {
 //        return JwtDecoders.fromOidcIssuerLocation(properties.getJwt().getIssuerUri());
 //    }
 
-    // #3 JWT 알고리즘을 변경하고 싶을 때
+    /**
+     * #3 JWT 알고리즘을 변경하고 싶을 때
+     */
 //    @Bean
 //    public JwtDecoder jwtDecoder3() {
 //        return NimbusJwtDecoder.withJwkSetUri(properties.getJwt().getJwkSetUri())
